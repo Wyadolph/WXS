@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 include_once( './php/config.php' );
@@ -72,7 +72,7 @@ $lng = json_encode($_SESSION['items']['lng']);
 
 /*数据库操作*/
 
-$SqlCount = sizeof($_SESSION['items']['text']);
+/*$SqlCount = sizeof($_SESSION['items']['text']);
 for ($i = 0; $i < $SqlCount; $i++)
 {
 	
@@ -81,7 +81,7 @@ for ($i = 0; $i < $SqlCount; $i++)
 	$_SESSION['items']['time'][$i], $_SESSION['items']['zhuye'][$i],
 	$_SESSION['items']['yonghuming'][$i], $_SESSION['items']['touxiangsrc'][$i],
 	$_SESSION['items']['lat'][$i], $_SESSION['items']['lng'][$i]);
-}
+}*/
 
 /*用户*/
 echo "var s = " .$s.";\n";
