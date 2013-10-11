@@ -116,6 +116,29 @@ tmp = '<div class="status-item" '+
 
 var line = new Array();
 
+function deletelat(lat, lng)
+{
+    var count=lat.length;
+    var i;
+    var j;
+    i=0;
+    while (i<count)
+    {
+        if (lat[i]>80 || lat[i]<-70)
+        {
+            for (j=i; j<count-1; j++)
+            {
+                lat[j]=lat[j+1];
+                lng[j]=lng[j+1];
+            }
+            count--;
+        }
+        i++;
+    }
+    for (i=0; lat[i]<=90&&lat[i]>=-90; i++);
+    lng.length=lat.length=i;
+}
+
 function initialize(s, ori_img,time,zhuye,yonghuming,touxiangsrc,lat, lng)
 {
 	if(s)
@@ -133,6 +156,8 @@ function initialize(s, ori_img,time,zhuye,yonghuming,touxiangsrc,lat, lng)
 		infowindow[index].open(map,element);
 		});
 	}
+	
+	deletelat(lat, lng);
     	
     	
         var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
