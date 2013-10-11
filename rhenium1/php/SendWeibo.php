@@ -2,11 +2,28 @@
 
 function SendWeibo($c)
 {
-echo "<a style=\"font-size:10px;color:#999\">发布微博</a>
+echo "
+
+<!--    添加的改正bug的代码     -->
+<script type=\"text/javascript\" src=\"jquery.min.js\"></script>
+<script type=\"text/javascript\">
+	$(function(){
+		$(\"#fabuyixiaba\").keyup(function(){
+			if($(\"#fabuyixiaba\").val()==\"\"){
+				$(\"#submit\").attr(\"disabled\",\"disabled\");
+			}else{
+				$(\"#submit\").attr(\"disabled\",false);
+			}
+		});
+		
+	})
+</script>
+
+<a style=\"font-size:10px;color:#999\">发布微博</a>
 <form action=\"index.php\" method=\"post\"
 enctype=\"multipart/form-data\">
 
-<input type=\"text\" name=\"send_text\" id=\"fabuyixiaba\"/><br /> 
+<input type=\"text\" name=\"send_text\" placeholder=\"在这里发布微博...\" id=\"fabuyixiaba\"/><br />  <!--添加文本框的注释 -->
 <label for=\"file\" style=\"font-size: 12px;color: #999;\">选择图片或当前地图:</label>
 <input type=\"file\" name=\"file\" id=\"file\" /> 
 <input type=\"submit\" name=\"submit\" value=\"发布\" id=\"submit\" onclick=\"PopBox()\"/>
