@@ -26,7 +26,7 @@ enctype=\"multipart/form-data\">
 <input type=\"text\" name=\"send_text\" placeholder=\"在这里发布微博...\" id=\"fabuyixiaba\"/><br />  <!--添加文本框的注释 -->
 <label for=\"file\" style=\"font-size: 12px;color: #999;\">选择图片或当前地图:</label>
 <input type=\"file\" name=\"file\" id=\"file\" /> 
-<input type=\"submit\" name=\"submit\" value=\"发布\" id=\"submit\" onclick=\"PopBox()\"/>
+<input type=\"submit\" name=\"submit\" value=\"发布\" disabled=\"disabled\"   id=\"submit\" onclick=\"PopBox()\"/>
 </form>
 ";
 
