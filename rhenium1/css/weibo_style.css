@@ -1,0 +1,108 @@
+.timeline_item
+{
+line-height: 1.62;
+padding-left:10px;
+}
+.mod
+{
+margin: 0;
+position: relative;
+}
+.head
+{
+float: left;
+margin:15px 20px 0 0;
+}
+.number
+{
+float: right;
+background-color: #F90;
+width: 20px;
+height: 16px;
+font-size: 8px;
+position: relative;
+right: 20px;
+top: 18px;
+text-align: center;
+color: white;
+font-weight: 600;
+display:none;
+}
+.name
+{
+cursor:pointer;
+word-wrap: break-word;
+color: #26A2DA;
+text-decoration: none;
+}
+.name:visited
+{
+color: #669;
+text-decoration: none;
+}
+.name:hover
+{
+color: white;
+text-decoration: none;
+background: #039;
+}
+.text
+{
+word-break: break-all;
+cursor: auto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+line-height: 22px;
+color: #444;
+margin-right:30px;
+width:490px;
+}
+.image
+{
+margin-left:20px;
+}
+.body
+{
+overflow: hidden;
+border-bottom: 1px solid #EEE;
+}
+.date, .source a, .source
+{
+font-size: 12px;
+color: #999;
+cursor: pointer;
+text-decoration: none;
+}
+.source a:hover, .date:hover, .comment_a:hover, .lucky:hover
+{
+	text-decoration: underline;
+}
+.comment_a
+{
+	color: #6C6351;
+cursor: pointer;
+text-decoration: none;
+position: absolute;
+left: 80%;
+font: 13px Arial,Helvetica,sans-serif;
+font-weight: 100;
+}
+.lucky
+{
+	font: 12px Arial,Helvetica,sans-serif;
+color: #F06;
+cursor: pointer;
+position: absolute;
+text-decoration: none;
+left: 90%;
+}
+.divide_head
+{
+color: #f60;
+font: 12px/1.125 Arial,Helvetica,sans-serif;
+text-align: center;
+margin: auto;
+margin-top: 5px;
+border-bottom: 1px solid #f60;
+}

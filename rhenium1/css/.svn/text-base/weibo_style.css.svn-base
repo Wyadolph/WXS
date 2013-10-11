@@ -1,0 +1,137 @@
+.timeline_item
+{
+line-height: 1.62;
+padding-left:10px;
+}
+.mod
+{
+margin: 0;
+position: relative;
+}
+.head
+{
+float: left;
+margin:15px 20px 0 0;
+}
+.number
+{
+float: right;
+background-color: #F90;
+width: 20px;
+height: 16px;
+font-size: 8px;
+position: relative;
+right: 20px;
+top: 18px;
+text-align: center;
+color: white;
+font-weight: 600;
+display:none;
+}
+.name
+{
+cursor:pointer;
+word-wrap: break-word;
+color: #26A2DA;
+text-decoration: none;
+}
+.name:visited
+{
+color: #669;
+text-decoration: none;
+}
+.name:hover
+{
+color: white;
+text-decoration: none;
+background: #039;
+}
+.text
+{
+word-break: break-all;
+cursor: auto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+line-height: 22px;
+color: #444;
+margin-right:30px;
+width:490px;
+}
+.image
+{
+margin-left:20px;
+}
+.body
+{
+overflow: hidden;
+border-bottom: 1px solid #EEE;
+}
+.date
+{
+font-size: 12px;
+color: #999;
+cursor: default;
+}
+.date:hover
+{
+	text-decoration: underline;
+	cursor: pointer;
+}
+.lucky
+{
+font: 12px Arial,Helvetica,sans-serif;
+cursor:pointer;
+color:#FF0066;
+position: absolute;
+left: 560px;
+}
+.user_see_more
+{
+background-color: #E3EEF8;
+text-decoration: none;
+padding: 10px;
+margin: 2px 25px 10px 90px;
+text-align: center;
+font-size: 15px;
+font-weight: bold;
+border: 1px solid;
+font-family: Tahoma, Verdana, STHeiTi, simsun, sans-serif;
+color: #369;
+cursor: pointer;
+}
+.user_see_more:hover
+{
+background-color:#CEE1EE;
+}
+.loadingAnimation
+{
+margin:auto;
+display:block;
+}
+.year_number
+{
+background: rgba(0, 0, 0, 0.2);
+font-size: 16px;
+width: 40px;
+height: 40px;
+line-height: 40px;
+margin: 5px;
+border-radius: 50%;
+display: block;
+text-align: center;
+cursor:pointer;
+}
+.year_number:hover
+{
+background:#f60;
+}
+.time_head
+{
+color: #f60;
+font: 12px/1.125 Arial,Helvetica,sans-serif;
+text-align: center;
+margin: auto;
+margin-top: 5px;
+border-bottom: 1px solid #f60;
+}

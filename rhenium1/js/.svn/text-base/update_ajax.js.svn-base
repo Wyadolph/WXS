@@ -1,0 +1,183 @@
+var page_place_user_timeline = 1;
+var no_more = 1;
+var year = "";
+var mouth = "";
+var mouth_count = 0;
+var feature = 0;
+
+function update_user_timeline(feature, start_time, end_time)
+{
+	start_time = start_time || 0;
+	 end_time = end_time || 0;
+	/*
+	feature 0,无筛选；1，仅文字；2，仅图片
+	*/
+	$.getJSON("../php/update_ajax.php",
+	{
+	oauth_token: oauth_token,
+	user_id: user_id,
+	page: page_place_user_timeline,
+	feature:feature,
+	start_time: start_time,
+	end_time:end_time,
+	},
+	function (data)
+	{
+		//$(".user_timeline").activity(false);
+		$(".loadingAnimation").remove()
+		console.log(data);
+		
+		$.each(data.weibo_items,
+		function(i, item)
+		{
+			var new_year = item.date.substring(7, 11);
+
+			if(year != new_year)
+			{
+				year = new_year;
+				$(".user_navigator").append("<div class='year " + year +"'><a class='year_number'>"+ year +"</a></div>");
+			}
+
+			var new_mouth = item.date.substring(12);
+			
+			if(mouth != new_mouth)
+			{
+				mouth = new_mouth;
+				mouth_count = 1;
+				$(".user_navigator").children("." + new_year).append("<div class='mouth " + new_mouth +"'><p class='mouth_number'>"+ "<a href='#" + "time_divide_" + new_year +"_" + new_mouth + "'>" + new_mouth + "</a>" +"</p><p class='mouth_count'>" + mouth_count + "条</p></div>");
+				$(".user_timeline_items").append("<div class='time_divide'><div id='time_divide_"+ year + "_" + mouth +"'><p class='time_head'>" + year + " " + mouth + "</p></div></div>");
+			}
+			else
+			{
+				mouth_count++;
+				$(".user_navigator").children("." + new_year).children("."+ new_mouth).children(".mouth_count").replaceWith("<p class='mouth_count'>"+ mouth_count +"条</p>");
+			}
+			
+			var find_time = "time_divide_"+ year + "_" + mouth;
+			$(".user_timeline_items").children(".time_divide:last").children("#"+ find_time).append(item.html);
+		});
+		
+		page_place_user_timeline++;
+		
+		$(".user_see_more").empty();
+		$(".user_see_more").append("更多");
+		
+		if((page_place_user_timeline - 1) * 20 >= data.total_number) 
+		{
+			$(".user_see_more").empty();
+			$(".user_see_more").append("没有更多了o(╯□╰)o");
+			no_more = 0;
+		}
+		
+		show_number();	
+		
+		var clicked = 0;
+		$(".mouth_number").click(
+		function()
+		{
+			clicked = 1;
+			$(".mouth").css("border-left", "6px solid #b0d4de");
+			$(this).parent().css("border-left", "6px solid rgba(0, 68, 204, 0.81)");
+			
+			$(".year_number").css("background", "rgba(0, 0, 0, 0.2)");
+			$(this).parent().parent().children("a:first").css("background", "rgba(255, 102, 0, 0.7)");
+		});
+		
+		var year_colored;
+		
+		$(".year_number").mouseenter(function()
+		{
+			year_colored = $(this).css("background-color");
+		
+			if(year_colored == "rgba(0, 0, 0, 0.2)")
+			{
+				$(this).css("background", "rgba(255, 102, 0, 0.7)");
+			}
+		});
+		
+		$(".year_number").mouseleave(function()
+		{
+				if(year_colored == "rgba(0, 0, 0, 0.2)")
+				{
+					$(this).css("background", "rgba(0, 0, 0, 0.2)");
+				}
+		});
+		
+		var mouth_colored;
+		
+		$(".mouth").mouseenter(function()
+		{
+			mouth_colored = $(this).css("border-left-color");
+			
+			if(mouth_colored == "rgb(176, 212, 222)")
+			{
+				$(this).css("border-left-color", "rgba(0, 68, 204, 0.81)");
+			}
+		});
+		
+		$(".mouth").mouseleave(function()
+		{
+			if(mouth_colored == "rgb(176, 212, 222)")
+			{
+				if(clicked == 0)
+				{
+					$(this).css("border-left-color", "#b0d4de");
+				}
+				
+				else
+				{
+					clicked = 0;
+				}
+			}
+		});
+	});
+}
+
+$(document).ready(function ()
+{
+	$(".user_timeline").prepend("<img src='../images/loadingAnimation.gif' class='loadingAnimation'/>");
+	update_user_timeline();
+
+	$(".user_see_more").click(function(){
+		click_update();
+		});
+
+	$(".no_select").click(function(){
+		clean_weibo();
+		feature = 0;
+		click_update();
+	});
+
+	$(".words_only").click(function(){
+		clean_weibo();
+		feature = 1;
+		click_update();
+	})
+
+	$(".photos_only").click(function(){
+		clean_weibo();
+		feature = 2;
+		click_update();	
+	})
+});
+
+function clean_weibo()
+{
+	$(".user_timeline_items").empty();
+	$(".user_navigator").empty();
+	$(".user_timeline").prepend("<img src='../images/loadingAnimation.gif' class='loadingAnimation'/>");
+	page_place_user_timeline = 1;
+	no_more = 1;
+}
+
+function click_update(){
+	if(no_more == 1)
+	{
+		$(".user_see_more").empty();
+		$(".user_see_more").append("稍等哦亲。。。");
+		$(".user_see_more").activity({segments:10,align:'right', width:2, space:0, length:3, color:"#000", speed: 1.5});
+		
+		update_user_timeline(feature);
+	}
+	else alert("没有更多了哦！");
+}

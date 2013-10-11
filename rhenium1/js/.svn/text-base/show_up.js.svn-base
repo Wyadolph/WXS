@@ -1,0 +1,136 @@
+function show_number()
+{
+	$(".user_timeline_item").each(
+		function(i)
+		{
+			$(this).children(".mod").children(".number").empty();
+			$(this).children(".mod").children(".number").append(i+1);
+						
+			$(this).mouseover(
+			function()
+			{
+				$(this).children(".mod").children(".number").css("display","block");
+			});
+			
+			$(this).mouseout(
+			function()
+			{
+				$(this).children(".mod").children(".number").css("display","none");
+			});
+		});
+}
+
+function show_menu()
+{		
+	var display = $(".slide_up").css("display");
+	if(display == "none")
+	{
+		$(".menu_items").slideDown();
+	}
+
+	else 
+	{
+		$(".menu_items").slideUp();
+	}
+	$(".slide_down").toggle();
+	$(".slide_up").toggle();
+}
+
+$(document).ready(
+function()
+{
+	$("#menu").click(function(){
+		show_menu();
+	});
+	
+	window.onmousewheel=
+	function()
+	{
+		var scrollLow = 0;
+		var total_height = 0
+		$(".user_timeline_items").children(".time_divide").each(
+		function(i)
+		{
+		total_height += $(this).height();
+		});
+	
+		var scrollTop_now = $(".user_weibo").scrollTop() + 100;
+		
+		$(".user_timeline_items").children(".time_divide").each(
+		function(i)
+		{
+			scrollUp = scrollLow + $(this).height();
+			
+			if(scrollTop_now >= scrollLow && scrollTop_now < scrollUp)
+			{
+				$(".mouth").css("border-left", "6px solid #b0d4de");
+				var select_mouth = ".mouth" + ":eq(" + i +")";
+				$(select_mouth).css("border-left", "6px solid rgba(0, 68, 204, 0.81)");
+				
+				$(".year_number").css("background", "rgba(0, 0, 0, 0.2)");
+				$(select_mouth).parent().children("a:first").css("background", "rgba(255, 102, 0, 0.7)");
+				
+				return false;
+			}
+			else
+			{
+				if(scrollUp < total_height)
+				{
+					scrollLow += $(this).height();
+					scrollUp += $(this).height();
+				}
+				else
+				{
+					return false;
+				}
+			}
+		});
+	};
+
+	css_no_slect = $(".inner_options").children("a:first");
+	word_over(css_no_slect);
+	word_out(css_no_slect.siblings());
+
+	var word_color = 0;
+
+	$(".inner_options").children("a").click(function(){
+		word_over($(this));
+		word_out($(this).siblings());
+		word_color = 1;
+	});
+
+	$(".inner_options").children("a").mouseenter(function(){
+		//console.log("enter over" + $(this).css("color"));
+		if ($(this).css("background-color") != "rgb(255, 255, 255)")
+		{
+			word_color = 1;
+		}
+
+		else{
+			word_over($(this));			
+		}
+
+	});
+
+	$(".inner_options").children("a").mouseleave(function(){
+		if (word_color == 0) {
+			word_out($(this));
+		}
+		else
+		{
+			word_color = 0;
+		}
+	})
+});
+
+function word_over(selector)
+{
+	selector.css("color","white");
+	selector.css("background","#039");
+}
+
+function word_out(selector)
+{
+	selector.css("color","#669");
+	selector.css("background","white");
+}

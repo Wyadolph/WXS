@@ -1,0 +1,107 @@
+<?php
+function show_weibo($user_timeline, $feature, $start_time, $end_time)
+{
+	if(is_array($user_timeline))
+	{
+		if($user_timeline)
+		{
+			$items_tmp = array();
+			$items = array();
+
+			foreach($user_timeline['statuses'] as $timeline_item)
+			{
+				if($feature == 1)
+				{
+					if($timeline_item['thumbnail_pic'])
+						continue;
+				}
+
+				else if($feature == 2)
+				{
+					if(!($timeline_item['thumbnail_pic']))
+						continue;
+				}
+
+				if($start_time != 0 && $end_time != 0)
+				{
+					continue;
+				}
+
+				$item = "";
+				$item .=  "<div class='user_timeline_item'>";
+				$item .=  "<div class='mod'>";
+					$item .=  "<div class = 'head'>";
+						$item .=  "<a href='http://weibo.com/". $timeline_item['user']['id'] ."' target='_blank' title='". $timeline_item['user']['screen_name']."'><img src='".$timeline_item['user']['profile_image_url']."' title='".$timeline_item['user']['screen_name']."' target='_blank'> </a>";
+					$item .=  "</div>";
+						$item .=  "<div class='number'></div>";
+					$item .=  "<div class = 'body'>";
+						$item .=  "<p class='text'>";
+							$item .=  "<a  class='name' href='http://weibo.com/". $timeline_item['user']['id'] ."' target='_blank' title=''".$timeline_item['user']['screen_name']."'> ".$timeline_item['user']['screen_name']."</a>";
+							$item .=  " : " ;
+							$item .=  "<a>".$timeline_item['text']."</a>";
+						$item .=  "</p>";
+						$item .=  "<div class='attachments'>";
+						if($timeline_item['thumbnail_pic'])
+						{
+						$item .=  "<a href='".$timeline_item['original_pic']."' target='_blank'><img class='image' src='".$timeline_item['thumbnail_pic']."title='点击查看大图'></a>";
+						}
+						$item .=  "</div>";
+						$item .=  "<div class='actions'>";
+							$item .=  "<p>";
+							$date_tmp = substr($timeline_item['created_at'],4 ,6). substr($timeline_item['created_at'],25 ,5);
+							$year = substr($timeline_item['created_at'], 26, 4);
+							$mouth = change_mouth(substr($timeline_item['created_at'], 4, 3));
+							$date_tmp .= " " . $mouth ."月";
+							$day = substr($timeline_item['created_at'], 8, 2);
+							$hour = substr($timeline_item['created_at'], 11, 2);
+							$minute = substr($timeline_item['created_at'], 14, 2);
+								$item .=  "<span title='". $timeline_item['created_at']."'><a class='date ".$date_tmp ."'>";
+								$item .= test_time($year, $mouth, $day, $hour, $minute) . "</a></span>";
+								$item .=  "<a class='lucky'>";
+								$item .=  "<img src='./image/lucky.jpg'>";
+								$item .=  "缘分</a>";
+							$item .=  "</p>";
+						$item .=  "</div>";
+						$item .=  "<div class='others'></div>";
+					$item .=  "</div>";
+				$item .=  "</div>";
+			$item .=  "</div>";
+			$items_tmp = array('html' => $item, 'date' => $date_tmp);
+			array_push($items, $items_tmp);
+			}
+			$json = array('weibo_items' => $items, 'total_number' => $user_timeline['total_number']);
+			echo json_encode($json);
+		}
+		else echo  "no more!";
+	}
+	else  echo "show_weibo error!";
+}
+
+function test_time($year, $mouth, $day, $hour, $minute)
+{
+	$time_test = $year."/".$mouth."/".$day;
+	$before_before_time = date("Y/m/d", mktime(0, 0, 0, date("m"),date("d") - 2,date("Y")));
+	$before_time = date("Y/m/d", mktime(0, 0, 0, date("m"),date("d") - 1,date("Y")));
+	$present_time = date("Y/m/d", mktime(0, 0, 0, date("m"),date("d"),date("Y")));
+	if($time_test == $present_time) return "今天 ";
+	else if($time_test == $before_time) return "昨天 ";
+	else if($time_test == $before_before_time) return "前天 ";
+	else return $year ."年". $mouth ."月". $day ."日" ." " . $hour . "时". $minute ."分";
+}
+
+function change_mouth($mouth)
+{
+if($mouth == "Jan") return "1";
+else if($mouth == "Feb") return "2";
+else if($mouth == "Mar") return "3";
+else if($mouth == "Apr") return "4";
+else if($mouth == "May") return "5";
+else if($mouth == "Jun") return "6";
+else if($mouth == "Jul") return "7";
+else if($mouth == "Aug") return "8";
+else if($mouth == "Sep") return "9";
+else if($mouth == "Oct") return "10";
+else if($mouth == "Nov") return "11";
+else if($mouth == "Dec") return "12";
+}
+?>

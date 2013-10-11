@@ -1,0 +1,117 @@
+.weibo
+{
+width: 85.5%；
+float:left;
+padding:10px;
+height:97%;
+overflow-y: scroll;
+}
+.timeline
+{
+height:445px;
+padding: 5px;
+margin: 3px;
+border: 1px solid rgba(255, 255, 255, 0.6);box-shadow: 1px 0 1px rgba(255, 255, 255, 0.7) inset, 1px 0 15px rgba(187, 196, 202, 0.3) inset, 1px 0 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.timeline_items
+{
+
+}
+.navigator
+{
+width:80px;
+float:left;
+height:100%;
+overflow-y:auto;
+}
+.status_bar
+{
+width: 2px;
+height: 98.5%;
+background: #E3E4EB;
+position: relative;
+float:left;
+}
+.big_tag_number
+{
+background: rgba(0, 0, 0, 0.2);
+font-size: 16px;
+width: 40px;
+height: 40px;
+line-height: 40px;
+margin: 5px;
+border-radius: 50%;
+display: block;
+text-align: center;
+cursor:pointer;
+}
+.big_tag_number:hover
+{
+background:#f60;
+}
+.small_tag
+{
+height: 36px;
+margin-bottom: 1px;
+border-left: 6px solid #b0d4de;
+cursor: pointer;
+margin-left: 20px;
+}
+.small_tag_number, .small_tag_count
+{
+font-size: 14px;
+float: left;
+display: block;
+position: relative;
+margin: auto;
+width: 80%;
+padding: 2px;
+text-align: center;
+font: 12px/1.125 Arial,Helvetica,sans-serif;
+color: #666;
+}
+.small_tag_number a
+{
+text-decoration:none;
+}
+.small_tag_number a:hover
+{
+text-decoration:underline;
+}
+.set a
+{
+text-decoration: none;
+color: #669;
+}
+.set a:hover
+{
+color: white;
+background: #039
+}
+.time_word
+{
+font: 14px Helvetica,Arial,sans-serif;
+color: #999;
+}
+.start_time, .end_time
+{
+width: 65px;
+width: 65px;
+cursor: not-allowed;
+border-radius: 0px 4px 4px 0px;
+background: #EEE;
+border: 1px solid #CCC;
+padding-top: 3px;
+padding-bottom: 2px;
+color: #555;
+}
+.start_time:focus, .end_time:focus, .cal_year:focus, .cal_mouth:focus, .cal_day:focus
+{
+border-color: rgba(82, 168, 236, 0.8);
+}
+.nomore
+{
+	font: 14px Helvetica,Arial,sans-serif;
+color: #999;
+text-align: center;
+}
